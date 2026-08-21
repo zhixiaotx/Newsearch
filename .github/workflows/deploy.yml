@@ -22,7 +22,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm install
+          npm install --include=optional
           npm run build
 
       - name: Deploy
