@@ -14,7 +14,7 @@ export default function SetupGuide() {
         </div>
 
         <p className="text-xs text-amber-800 leading-relaxed mb-4">
-          NewsFinder 需要 NewsAPI 密钥来获取新闻数据。可选配 AI 密钥（Gemini）来启用语义搜索、选题提炼与翻译功能。
+          Newsearch 需要 NewsAPI 密钥来获取新闻数据。可选配 AI 密钥（Gemini）来启用语义搜索、选题提炼与翻译功能。
         </p>
 
         <div className="space-y-2">

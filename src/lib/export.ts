@@ -86,7 +86,7 @@ export function exportPDF(articles: NewsArticle[], query: string) {
   const pageWidth = doc.internal.pageSize.getWidth();
 
   doc.setFontSize(18);
-  doc.text(`NewsFinder: ${query}`, margin, y);
+  doc.text(`Newsearch: ${query}`, margin, y);
   y += 15;
 
   articles.forEach((a, i) => {
