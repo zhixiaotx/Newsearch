@@ -22,8 +22,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          rm -rf node_modules package-lock.json
-          npm install --force --include=optional
+          npm install --include=optional
           npm run build
 
       - name: Deploy
