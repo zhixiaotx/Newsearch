@@ -1,6 +1,34 @@
-# 🌟 拾光排版器 (Typesetter V4.1) - 智能 Markdown 与全功能微信排版工具
+# 🌟 拾光排版器 (Newsearch / Typesetter) - 零基础从零掌握现代 Markdown 与微信排版工具
 
-> **拾光排版器** 是一款专为微信公众号创作者、技术写作者及自媒体达人打造的现代化全功能 Markdown 排版工具。不仅支持 35 套精心打磨的主题与优雅卡片样式，更全面支持 **Markdown 全量语法、KaTeX 数学公式、高亮代码块、Mermaid 动态图表**，并支持一键复制微信草稿、导出 Markdown、HTML、PDF 及高清长图！
+> **拾光排版器** 是一款专为微信公众号创作者、技术写作者及自媒体达人打造的现代化全功能 Markdown 排版工具。不仅内置 **35 套精美主题与优雅卡片**，更完美支持 **Markdown 全量语法、KaTeX 数学公式、Prism.js 代码高亮、Mermaid 动态图表**，并支持一键复制微信草稿、导出 Markdown、HTML、PDF 及高清长图！
+
+---
+
+## 📁 详细项目文件结构与作用解析 (小白必读)
+
+为了让没有任何编程基础的新手也能彻底读懂、学会并二次开发本项目，以下为您逐一拆解项目中每个核心文件的功能与作用：
+
+```text
+.
+├── server.ts                # [后端入口] Express 服务端核心文件，负责处理 API 代理、静态资源托管与生产环境托管。
+├── package.json             # [依赖清单] 记录了项目所有的第三方插件（如 markdown-it, mermaid, html2canvas, jspdf, prismjs 等）及运行脚本。
+├── vite.config.ts           # [构建配置] Vite 前端构建工具配置文件，配置了 Tailwind CSS 插件与打包路径。
+├── .env.example             # [环境变量模版] 用于定义项目所需的密钥与环境变量模版。
+├── metadata.json            # [应用元数据] 定义了应用的名称、描述与权限声明。
+├── index.html               # [网页根节点] HTML 首页模板，加载了 KaTeX 数学公式样式库及 Prism 字体主题。
+└── src/                     # [源码目录] 存放所有前端交互与业务逻辑代码
+    ├── main.tsx             # [前端入口] React 应用的启动挂载点，将 App 组件渲染到根 DOM 中。
+    ├── App.tsx              # [根组件] 应用主路由与顶层容器组件。
+    ├── index.css            # [全局样式] 引入了 Tailwind CSS 核心样式与排版基础。
+    ├── types.ts             # [类型定义] 定义全局公用的 TypeScript 数据接口与类型（如文章、主题结构等）。
+    ├── pages/               # [页面模块]
+    │   └── Typesetter.tsx   # [核心页面] 拾光排版器主界面，集成了 35 套主题切换、Markdown 实时解析引擎、手机高保真预览与导出功能。
+    ├── components/          # [UI 积木组件]
+    │   ├── NavBar.tsx       # 全局顶部导航栏组件。
+    │   └── Toast.tsx        # 屏幕全局消息提示条（如“复制成功”、“导出 PDF 成功”等）。
+    └── hooks/               # [状态与业务 Hook]
+        └── useCollections.ts# 本地收藏与选题数据管理钩子函数。
+```
 
 ---
 
@@ -18,29 +46,6 @@
    - **🌐 导出 HTML 文件**：带内联样式的独立网页文件。
    - **📑 导出 PDF 文件**：高质量分页打印文档。
    - **🖼️ 导出高清长截图 (`.png`)**：适合社群与朋友圈分享。
-
----
-
-## 📁 详细项目文件结构 (小白必读)
-
-```text
-.
-├── server.ts                # [核心] 后端服务，处理 API 接口代理与构建
-├── package.json             # 项目依赖与运行脚本清单（已集成 Mermaid, KaTeX, html2canvas 等）
-├── vite.config.ts           # Vite 构建配置（适配全平台部署）
-├── .env.example             # 环境变量模版
-├── README.md                # 您正在阅读的项目完全说明书
-└── src/                     # 前端源代码
-    ├── pages/               # 页面组件
-    │   ├── Typesetter.tsx   # [核心页面] 拾光排版器主界面（编辑器, 主题面板, 手机实时预览）
-    │   └── ...              # 其他辅助页面
-    ├── components/          # UI 积木组件
-    │   ├── NavBar.tsx       # 全局导航栏
-    │   └── Toast.tsx        # 屏幕消息提示（如“复制成功”、“导出完成”）
-    ├── hooks/               # 业务逻辑与状态管理
-    │   └── useCollections.ts# 本地选题与文章收藏管理
-    └── lib/                 # 工具箱与类型定义
-```
 
 ---
 
@@ -67,10 +72,10 @@ npm run dev
 
 ## 📦 线上部署指南 (一键发布上手)
 
-本项目支持打包为纯静态前端或全栈应用，您可以极其轻松地免费部署到主流云平台：
+如果您遇到部署报错（如 Git 远程分支或权限问题），推荐使用以下最稳定、最简单的部署方式：
 
 ### 1. Vercel 部署 (推荐，免费且极速)
-1. 将本项目代码上传至您的 GitHub 仓库。
+1. 将本项目代码下载并通过 ZIP 上传至 GitHub，或通过 GitHub 仓库导入。
 2. 登录 [Vercel](https://vercel.com/)，点击 **Add New -> Project**，导入您的 GitHub 仓库。
 3. 检查构建设置（通常自动识别）：
    - **Build Command**: `npm run build`
